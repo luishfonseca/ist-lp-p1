@@ -29,16 +29,15 @@ permutacoes_soma(N, Els, Soma, Perms) :-
 espaco_fila(Fila, espaco(H, Esp), h) :- espaco_fila(Fila, [_, H], Esp).
 espaco_fila(Fila, espaco(V, Esp), v) :- espaco_fila(Fila, [V, _], Esp).
 
-espaco_fila(Fila, Pos, Esp) :-
-    append([_, [Pos | Esp], Fim], Fila),
-    posicao(Pos),
-    \+length(Esp, 0),
-    include(posicao, Esp, Separadores),
-    length(Separadores, 0),
-    termina(Fim).
+espaco_fila(Fila, Soma, Posicoes) :-
+    append([_, [Soma | Posicoes], Cauda], Fila),
+    posicao_soma(Soma),
+    \+length(Posicoes, 0),
+    include(posicao_soma, Posicoes, []),
+    termina(Cauda).
 
-posicao([V, H]) :- number(V), number(H).
-termina([Pos | _]) :- posicao(Pos).
+posicao_soma([V, H]) :- number(V), number(H).
+termina([Pos | _]) :- posicao_soma(Pos).
 termina([]).
 
 %-------------------------------------------------------------------------------
