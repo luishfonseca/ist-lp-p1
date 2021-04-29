@@ -28,8 +28,8 @@ permutacoes_soma(N, Els, Soma, Perms) :-
 % puzzle e H_V eh um dos atomos h ou v, conforme se trate de uma fila horizontal
 % ou vertical, respectivamente, significa que Esp eh um espaco de Fila.
 %-------------------------------------------------------------------------------
-espaco_fila(Fila, espaco(H, Esp), h) :- espaco_fila(Fila, [H, _], Esp).
-espaco_fila(Fila, espaco(V, Esp), v) :- espaco_fila(Fila, [_, V], Esp).
+espaco_fila(Fila, espaco(H, Esp), h) :- espaco_fila(Fila, [_, H], Esp).
+espaco_fila(Fila, espaco(V, Esp), v) :- espaco_fila(Fila, [V, _], Esp).
 
 espaco_fila(Fila, Pos, Esp) :-
     append([_, [Pos | Esp], Fim], Fila),
@@ -39,6 +39,6 @@ espaco_fila(Fila, Pos, Esp) :-
     length(Separadores, 0),
     termina(Fim).
 
-posicao([H, V]) :- number(H), number(V).
+posicao([V, H]) :- number(V), number(H).
 termina([Pos | _]) :- posicao(Pos).
 termina([]).
