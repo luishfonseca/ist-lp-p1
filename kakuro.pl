@@ -22,4 +22,23 @@ permutacoes_soma(N, Els, Soma, Perms) :-
     findall(Perm, (member(Comb, Combs), permutation(Comb, Perm)), Unsorted),
     sort(Unsorted, Perms).
 
+%-------------------------------------------------------------------------------
+%               espaco_fila(Fila, Esp, H_V)
+% espaco_fila(Fila, Esp, H_V), em que Fila eh uma fila (linha ou coluna) de um
+% puzzle e H_V eh um dos atomos h ou v, conforme se trate de uma fila horizontal
+% ou vertical, respectivamente, significa que Esp eh um espaco de Fila.
+%-------------------------------------------------------------------------------
+espaco_fila(Fila, espaco(H, Esp), h) :- espaco_fila(Fila, [H, _], Esp).
+espaco_fila(Fila, espaco(V, Esp), v) :- espaco_fila(Fila, [_, V], Esp).
 
+espaco_fila(Fila, Pos, Esp) :-
+    append([_, [Pos | Esp], Fim], Fila),
+    posicao(Pos),
+    \+length(Esp, 0),
+    include(posicao, Esp, Separadores),
+    length(Separadores, 0),
+    termina(Fim).
+
+posicao([H, V]) :- number(H), number(V).
+termina([Pos | _]) :- posicao(Pos).
+termina([]).
