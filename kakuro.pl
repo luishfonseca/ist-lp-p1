@@ -47,7 +47,10 @@ termina([]).
 % todos os espacos de Fila, da esquerda para a direita.
 %-------------------------------------------------------------------------------
 espacos_fila(H_V, Fila, Espacos) :-
-    findall(Esp, espaco_fila(Fila, Esp, H_V), Espacos).
+    bagof(Esp, Esp^espaco_fila(Fila, Esp, H_V), Espacos), !.
+
+espacos_fila(H_V, Fila, []) :-
+    \+espaco_fila(Fila, _, H_V).
 
 %-------------------------------------------------------------------------------
 %               espacos_puzzle(Puzzle, Espacos)
