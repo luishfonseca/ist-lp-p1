@@ -42,3 +42,12 @@ espaco_fila(Fila, Pos, Esp) :-
 posicao([V, H]) :- number(V), number(H).
 termina([Pos | _]) :- posicao(Pos).
 termina([]).
+
+%-------------------------------------------------------------------------------
+%               espacos_fila(H_V, Fila, Espacos)
+% espacos_fila(H_V, Fila, Espacos), em que Fila eh uma fila (linha ou coluna) de
+% uma grelha e H_V eh um dos atomos h ou v, significa que Espacos eh a lista de
+% todos os espacos de Fila, da esquerda para a direita.
+%-------------------------------------------------------------------------------
+espacos_fila(H_V, Fila, Espacos) :-
+    findall(Esp, espaco_fila(Fila, Esp, H_V), Espacos).
