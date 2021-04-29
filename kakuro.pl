@@ -1,5 +1,3 @@
-:- [codigo_comum].
-
 %-------------------------------------------------------------------------------
 %               combinacoes_soma(N, Els, Soma, Combs)
 % combinacoes_soma(N, Els, Soma, Combs), em que N eh um inteiro, Els eh uma
@@ -51,3 +49,15 @@ termina([]).
 %-------------------------------------------------------------------------------
 espacos_fila(H_V, Fila, Espacos) :-
     findall(Esp, espaco_fila(Fila, Esp, H_V), Espacos).
+
+%-------------------------------------------------------------------------------
+%               espacos_puzzle(Puzzle, Espacos)
+% espacos_puzzle(Puzzle, Espacos), em que Puzzle eh um puzzle, significa que
+% Espacos eh a lista de espacos de Puzzle.
+%-------------------------------------------------------------------------------
+espacos_puzzle(Puzzle, Espacos) :-
+    maplist(espacos_fila(h), Puzzle, Espacos_h),
+    mat_transposta(Puzzle, Transp),
+    maplist(espacos_fila(v), Transp, Espacos_v),
+    append(Espacos_h, Espacos_v, Esps),
+    append(Esps, Espacos).
