@@ -30,15 +30,18 @@ espaco_fila(Fila, espaco(H, Esp), h) :- espaco_fila(Fila, [_, H], Esp).
 espaco_fila(Fila, espaco(V, Esp), v) :- espaco_fila(Fila, [V, _], Esp).
 
 espaco_fila(Fila, Soma, Posicoes) :-
-    append([_, [Soma | Posicoes], Cauda], Fila),
+    append([_, [Soma], Posicoes, [Proxima_soma], _], Fila),
+    all(posicao_soma, [Soma, Proxima_soma]),
+    Posicoes \= [],
+    \+any(posicao_soma, Posicoes).
+
+espaco_fila(Fila, Soma, Posicoes) :-
+    append([_, [Soma], Posicoes], Fila),
     posicao_soma(Soma),
-    \+length(Posicoes, 0),
-    include(posicao_soma, Posicoes, []),
-    termina(Cauda).
+    Posicoes \= [],
+    \+any(posicao_soma, Posicoes).
 
 posicao_soma([V, H]) :- number(V), number(H).
-termina([Pos | _]) :- posicao_soma(Pos).
-termina([]).
 
 %-------------------------------------------------------------------------------
 %               espacos_fila(H_V, Fila, Espacos)
