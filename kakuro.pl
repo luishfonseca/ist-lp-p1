@@ -52,8 +52,7 @@ posicao_soma([V, H]) :- number(V), number(H).
 espacos_fila(H_V, Fila, Espacos) :-
     bagof(Esp, Esp^espaco_fila(Fila, Esp, H_V), Espacos), !.
 
-espacos_fila(H_V, Fila, []) :-
-    \+espaco_fila(Fila, _, H_V).
+espacos_fila(_, _, []).
 
 %-------------------------------------------------------------------------------
 %               espacos_puzzle(Puzzle, Espacos)
