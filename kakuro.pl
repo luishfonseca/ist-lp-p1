@@ -63,3 +63,20 @@ espacos_puzzle(Puzzle, Espacos) :-
     maplist(espacos_fila(v), Transp, Espacos_v),
     append(Espacos_h, Espacos_v, Esps),
     append(Esps, Espacos).
+
+%-------------------------------------------------------------------------------
+%               any(Goal, Lista)
+%-------------------------------------------------------------------------------
+any(Goal, [El | _]) :-
+    call(Goal, El), !.
+
+any(Goal, [_ | Resto]) :- any(Goal, Resto).
+
+%-------------------------------------------------------------------------------
+%               all(Goal, Lista)
+%-------------------------------------------------------------------------------
+all(_, []) :- !.
+
+all(Goal, [El | Resto]) :-
+    call(Goal, El),
+    all(Goal, Resto).
