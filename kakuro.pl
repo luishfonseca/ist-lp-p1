@@ -66,7 +66,6 @@ espacos_puzzle(Puzzle, Espacos) :-
     append(Espacos_h, Espacos_v, Esps),
     append(Esps, Espacos).
 
-
 %-------------------------------------------------------------------------------
 %               espacos_com_posicoes_comuns(Espacos, Esp, Esps_com)
 % espacos_com_posicoes_comuns(Espacos, Esp, Esps_com), em que Espacos eh uma
@@ -79,6 +78,21 @@ espacos_com_posicoes_comuns(Espacos, Esp, Esps_com) :-
 espaco_com_posicoes_comuns(espaco(_, Posicoes1), espaco(_, Posicoes2)) :-
     Posicoes1 \== Posicoes2,
     \+ findall(Com, (member(Com, Posicoes1), any(==(Com), Posicoes2)), []).
+
+%-------------------------------------------------------------------------------
+%               permutacoes_soma_espacos(Espacos, Perms_soma)
+% permutacoes_soma_espacos(Espacos, Perms_soma), em que Espacos eh uma lista de
+% espacos, significa que Perms_soma eh a lista de listas de 2 elementos, em que
+% o primeiro elemento eh um espaco de Espacos e o segundo eh a lista ordenada de
+% permutacoes cuja soma eh igual a soma do espaco.
+%-------------------------------------------------------------------------------
+permutacoes_soma_espacos(Espacos, Perms_soma) :-
+    maplist(permutacoes_soma_espaco, Espacos, Perms_soma).
+
+permutacoes_soma_espaco(espaco(Soma, Esp), [espaco(Soma, Esp), Perms]) :-
+    numlist(1, 9, Ns),
+    length(Esp, Len),
+    permutacoes_soma(Len, Ns, Soma, Perms).
 
 %-------------------------------------------------------------------------------
 %               any(Goal, Lista)
