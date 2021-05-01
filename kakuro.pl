@@ -66,6 +66,20 @@ espacos_puzzle(Puzzle, Espacos) :-
     append(Espacos_h, Espacos_v, Esps),
     append(Esps, Espacos).
 
+
+%-------------------------------------------------------------------------------
+%               espacos_com_posicoes_comuns(Espacos, Esp, Esps_com)
+% espacos_com_posicoes_comuns(Espacos, Esp, Esps_com), em que Espacos eh uma
+% lista de espacos e Esp eh um espaco, significa que Esps_com eh a lista de
+% espacos com variaveis em comum com Esp, exceptuando Esp.
+%-------------------------------------------------------------------------------
+espacos_com_posicoes_comuns(Espacos, Esp, Esps_com) :-
+    include(espaco_com_posicoes_comuns(Esp), Espacos, Esps_com).
+
+espaco_com_posicoes_comuns(espaco(_, Posicoes1), espaco(_, Posicoes2)) :-
+    Posicoes1 \== Posicoes2,
+    \+ findall(Com, (member(Com, Posicoes1), any(==(Com), Posicoes2)), []).
+
 %-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
