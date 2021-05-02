@@ -33,13 +33,13 @@ espaco_fila(Fila, Soma, Posicoes) :-
     append([_, [Soma], Posicoes, [Proxima_soma], _], Fila),
     all(posicao_soma, [Soma, Proxima_soma]),
     Posicoes \= [],
-    \+any(posicao_soma, Posicoes).
+    \+ any(posicao_soma, Posicoes).
 
 espaco_fila(Fila, Soma, Posicoes) :-
     append([_, [Soma], Posicoes], Fila),
     posicao_soma(Soma),
     Posicoes \= [],
-    \+any(posicao_soma, Posicoes).
+    \+ any(posicao_soma, Posicoes).
 
 posicao_soma([V, H]) :- number(V), number(H).
 
