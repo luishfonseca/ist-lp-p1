@@ -95,6 +95,24 @@ permutacoes_soma_espaco(espaco(Soma, Esp), [espaco(Soma, Esp), Perms]) :-
     permutacoes_soma(Len, Ns, Soma, Perms).
 
 %-------------------------------------------------------------------------------
+%               permutacao_possivel_espaco(Perm, Esp, Espacos, Perms_soma)
+% permutacao_possivel_espaco(Perm, Esp, Espacos, Perms_soma), em que Perm eh uma
+% permutacao, Esp eh um espaco, Espacos eh uma lista de espacos, e Perms_soma
+% eh uma lista de listas tal como obtida pelo predicado permutacoes_soma_espaco,
+% significa que Perm eh uma permutacao possivel para o espaco Esp.
+%-------------------------------------------------------------------------------
+permutacao_possivel_espaco(Perm, espaco(Soma, Esp), Espacos, Perms_soma) :-
+    espacos_com_posicoes_comuns(Espacos, espaco(Soma, Esp), Esps_com),
+    member([espaco(Soma, Esp), Perms], Perms_soma),
+    member(Perm, Perms),
+    maplist(permutacao_possivel(Perms_soma), Esp, Perm, Esps_com).
+
+permutacao_possivel(Perms_soma, Pos, Pos, espaco(Soma, Esp)) :-
+    member([espaco(Soma, Esp), Perms], Perms_soma),
+    % Não interessa com o que unifica apenas se unifica.
+    \+ \+ member(Esp, Perms).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
