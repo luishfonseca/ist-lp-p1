@@ -113,6 +113,21 @@ permutacao_possivel(Perms_soma, Pos, Pos, espaco(Soma, Esp)) :-
     \+ \+ member(Esp, Perms).
 
 %-------------------------------------------------------------------------------
+%               numeros_comuns(Lst_Perms, Numeros_comuns)
+% numeros_comuns(Lst_Perms, Numeros_comuns), em que Lst_Perms eh uma lista de
+% permutacoes, significa que Numeros_comuns eh uma lista de pares (pos, numero),
+% significando que todas as listas de Lst_Perms contem o numero numero na
+% posicao pos.
+%-------------------------------------------------------------------------------
+numeros_comuns(Lst_Perms, Numeros_comuns) :-
+    findall(Numero, numero_comum(Lst_Perms, Numero), Numeros_comuns).
+
+numero_comum(Lst_Perms, (Pos, Numero)) :-
+    all(aux_nth1(Pos, Numero), Lst_Perms).
+
+aux_nth1(Pos, Elem, Lst) :- nth1(Pos, Lst, Elem).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
