@@ -112,6 +112,20 @@ permutacao_possivel(Perms_soma, El, espaco(_, Esp)) :-
     any(any(==(El)), Perms).
 
 %-------------------------------------------------------------------------------
+%               permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp,
+%                                                                   Perms_poss)
+% permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp, Perms_poss), em que
+% Espacos eh uma lista de espacos, Perms_soma eh uma lista de listas tal como
+% obtida pelo predicado permutacoes_soma_espacos, e Esp eh um espaco, significa
+% que Perms_poss eh uma lista de 2 elementos em que o primeiro eh a lista de
+% variaveis de Esp e o segundo eh a lista ordenada de permutacoes possiveis para
+% o espaco Esp.
+%-------------------------------------------------------------------------------
+permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp, [Vars, Ps]) :-
+    Esp = espaco(_, Vars),
+    bagof(P, permutacao_possivel_espaco(P, Esp, Espacos, Perms_soma), Ps).
+
+%-------------------------------------------------------------------------------
 %               numeros_comuns(Lst_Perms, Numeros_comuns)
 % numeros_comuns(Lst_Perms, Numeros_comuns), em que Lst_Perms eh uma lista de
 % permutacoes, significa que Numeros_comuns eh uma lista de pares (pos, numero),
