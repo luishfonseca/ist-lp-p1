@@ -190,6 +190,16 @@ simplifica(P1, P3) :-
     (P1 \== P2 -> simplifica(P2, P3); P2 = P3).
 
 %-------------------------------------------------------------------------------
+%               inicializa(Puzzle, Perms_Possiveis)
+% inicializa(Puzzle, Perms_Possiveis), em que Puzzle eh um puzzle, significa que
+% Perms_Possiveis eh a lista de permutacoes possiveis simplificada para Puzzle.
+%-------------------------------------------------------------------------------
+inicializa(Puzzle, Novas_Perms_Possiveis) :-
+    espacos_puzzle(Puzzle, Espacos),
+    permutacoes_possiveis_espacos(Espacos, Perms_Possiveis),
+    simplifica(Perms_Possiveis, Novas_Perms_Possiveis).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
