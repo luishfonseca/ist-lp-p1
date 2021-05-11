@@ -246,6 +246,16 @@ resolve_aux(Perms, Novas_Perms) :-
 resolve_aux(Perms, Perms_Simples) :- simplifica(Perms, Perms_Simples).
 
 %-------------------------------------------------------------------------------
+%               resolve(Puz)
+% resolve(Puz), em que Puz eh um puzzle, resolve esse puzzle, isto eh, apos a
+% invocacao deste predicado a grelha de Puz tem todas as variaveis subtituidas
+% por numeros que respeitam as restricoes Puz.
+%-------------------------------------------------------------------------------
+resolve(Puz) :-
+    inicializa(Puz, Perms_Possiveis),
+    resolve_aux(Perms_Possiveis, _).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
