@@ -238,7 +238,7 @@ experimenta_perm([Esp, Lst_Perms], Perms_Possiveis, Novas_Perms_Possiveis) :-
 % resultado de aplicar o
 %-------------------------------------------------------------------------------
 resolve_aux(Perms, Novas_Perms) :-
-    escolhe_menor_alternativas(Perms, Escolha), !,
+    escolhe_menos_alternativas(Perms, Escolha), !,
     experimenta_perm(Escolha, Perms, Perms_Testadas),
     simplifica(Perms_Testadas, Perms_Simples),
     resolve_aux(Perms_Simples, Novas_Perms).
