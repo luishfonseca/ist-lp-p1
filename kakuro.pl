@@ -166,6 +166,19 @@ atribui_comum([Vars, Perms]) :-
 aux_nth1(Vars, (Index, Val)) :- nth1(Index, Vars, Val).
 
 %-------------------------------------------------------------------------------
+%               retira_impossiveis(Perms_Possiveis, Novas_Perms_Possiveis)
+% retira_impossiveis(Perms_Possiveis, Novas_Perms_Possiveis), em que
+% Perms_Possiveis eh uma lista de permutacoes possiveis significa que
+% Novas_Perms_Possiveis eh o resultado de tirar permutacoes impossiveis de
+% Perms_Possiveis.
+%-------------------------------------------------------------------------------
+retira_impossiveis(Perms_Possiveis, Novas_Perms_Possiveis) :-
+    maplist(sem_impossiveis, Perms_Possiveis, Novas_Perms_Possiveis).
+
+sem_impossiveis([Vars, Perms], [Vars, Novas_Perms]) :-
+    exclude(\=(Vars), Perms, Novas_Perms).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
