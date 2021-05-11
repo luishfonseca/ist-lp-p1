@@ -104,7 +104,8 @@ permutacao_possivel_espaco(Perm, espaco(Soma, Esp), Espacos, Perms_soma) :-
     member([espaco(Soma, Esp_soma), Perms], Perms_soma),
     Esp == Esp_soma,
     member(Perm, Perms),
-    maplist(permutacao_possivel(Perms_soma), Perm, Esps_com).
+    length(Esps_com, L), append(P, _, Perm), length(P, L),
+    maplist(permutacao_possivel(Perms_soma), P, Esps_com).
 
 permutacao_possivel(Perms_soma, El, espaco(_, Esp)) :-
     member([espaco(_, Esp_soma), Perms], Perms_soma),
