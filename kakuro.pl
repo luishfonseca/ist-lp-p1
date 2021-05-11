@@ -112,8 +112,7 @@ permutacao_possivel(Perms_soma, El, espaco(_, Esp)) :-
     any(any(==(El)), Perms).
 
 %-------------------------------------------------------------------------------
-%               permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp,
-%                                                                   Perms_poss)
+%               permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp, Perms_poss)
 % permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp, Perms_poss), em que
 % Espacos eh uma lista de espacos, Perms_soma eh uma lista de listas tal como
 % obtida pelo predicado permutacoes_soma_espacos, e Esp eh um espaco, significa
