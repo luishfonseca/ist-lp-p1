@@ -244,7 +244,9 @@ resolve_aux(Perms, Novas_Perms) :-
     simplifica(Perms_Testadas, Perms_Simples),
     resolve_aux(Perms_Simples, Novas_Perms).
 
-resolve_aux(Perms, Perms_Simples) :- simplifica(Perms, Perms_Simples).
+resolve_aux(Perms, Perms_Simples) :-
+    all(all(\=([])), Perms),
+    simplifica(Perms, Perms_Simples), !.
 
 %-------------------------------------------------------------------------------
 %               resolve(Puz)
