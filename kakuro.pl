@@ -126,6 +126,16 @@ permutacoes_possiveis_espaco(Espacos, Perms_soma, Esp, [Vars, Ps]) :-
     bagof(P, permutacao_possivel_espaco(P, Esp, Espacos, Perms_soma), Ps).
 
 %-------------------------------------------------------------------------------
+%               permutacoes_possiveis_espacos(Espacos, Perms_poss_esps)
+% permutacoes_possiveis_espacos(Espacos, Perms_poss_esps), em que Espacos eh uma
+% lista de espacos, significa que Perms_poss_esps eh a lista de permutacoes
+% possiveis.
+%-------------------------------------------------------------------------------
+permutacoes_possiveis_espacos(Espacos, Perms_poss_esps) :-
+    permutacoes_soma_espacos(Espacos, Perms_soma),
+    maplist(permutacoes_possiveis_espaco(Espacos, Perms_soma), Espacos, Perms_poss_esps).
+
+%-------------------------------------------------------------------------------
 %               numeros_comuns(Lst_Perms, Numeros_comuns)
 % numeros_comuns(Lst_Perms, Numeros_comuns), em que Lst_Perms eh uma lista de
 % permutacoes, significa que Numeros_comuns eh uma lista de pares (pos, numero),
