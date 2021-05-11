@@ -215,6 +215,23 @@ mais_curto(Perms1, Perms2) :-
     N1 =< N2.
 
 %-------------------------------------------------------------------------------
+%               experimenta_perm(Escolha, Perms_Possiveis, Novas_Perms_Possiveis)
+% A chamada experimenta_perm(Escolha, Perms_Possiveis, Novas_Perms_Possiveis),
+% em que Perms_Possiveis eh uma lista de permutacoes possiveis, e Escolha eh um
+% dos seus elementos (escolhido por escolhe_menos_alternativas), segue os
+% seguintes passos:
+%   1. Sendo Esp e Lst_Perms o espaco e a lista de permutacoes de Escolha,
+%   respectivamente, escolhe uma permutacao de Lst_Perms, Perm.
+%   2. Unifica Esp com Perm.
+%   3. Novas_Perms_Possiveis eh o resultado de substituir, em Perms_Possiveis, o
+%   elemento Escolha pelo elemento [Esp, [Perm]].
+%-------------------------------------------------------------------------------
+experimenta_perm([Esp, Lst_Perms], Perms_Possiveis, Novas_Perms_Possiveis) :-
+    member(Esp, Lst_Perms),
+    append([Pre, [[Esp, Lst_Perms]], Post], Perms_Possiveis),
+    append([Pre, [[Esp, [Esp]]], Post], Novas_Perms_Possiveis).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
