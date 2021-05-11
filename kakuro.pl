@@ -232,6 +232,20 @@ experimenta_perm([Esp, Lst_Perms], Perms_Possiveis, Novas_Perms_Possiveis) :-
     append([Pre, [[Esp, [Esp]]], Post], Novas_Perms_Possiveis).
 
 %-------------------------------------------------------------------------------
+%               resolve_aux(Perms_Possiveis, Novas_Perms_Possiveis)
+% resolve_aux(Perms_Possiveis, Novas_Perms_Possiveis), em que Perms_Possiveis eh
+% uma lista de permutacoes possiveis, significa que Novas_Perms_Possiveis eh o
+% resultado de aplicar o
+%-------------------------------------------------------------------------------
+resolve_aux(Perms, Novas_Perms) :-
+    escolhe_menor_alternativas(Perms, Escolha), !,
+    experimenta_perm(Escolha, Perms, Perms_Testadas),
+    simplifica(Perms_Testadas, Perms_Simples),
+    resolve_aux(Perms_Simples, Novas_Perms).
+
+resolve_aux(Perms, Perms_Simples) :- simplifica(Perms, Perms_Simples).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
