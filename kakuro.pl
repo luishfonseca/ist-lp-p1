@@ -151,6 +151,21 @@ numero_comum(Lst_Perms, (Pos, Numero)) :-
 aux_nth1(Pos, Elem, Lst) :- nth1(Pos, Lst, Elem).
 
 %-------------------------------------------------------------------------------
+%               atribui_comuns(Perms_Possiveis)
+% atribui_comuns(Perms_Possiveis), em que Perms_Possiveis eh uma lista de
+% permutacoes possiveis, actualiza esta lista atribuindo a cada espaco numeros
+% comuns a todas as permutacoes possiveis para esse espaco.
+%-------------------------------------------------------------------------------
+atribui_comuns(Perms_Possiveis) :-
+    all(atribui_comum, Perms_Possiveis).
+
+atribui_comum([Vars, Perms]) :-
+    numeros_comuns(Perms, Coms),
+    all(aux_nth1(Vars), Coms).
+
+aux_nth1(Vars, (Index, Val)) :- nth1(Index, Vars, Val).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
