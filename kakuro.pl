@@ -179,6 +179,17 @@ sem_impossiveis([Vars, Perms], [Vars, Novas_Perms]) :-
     exclude(\=(Vars), Perms, Novas_Perms).
 
 %-------------------------------------------------------------------------------
+%               simplifica(Perms_Possiveis, Novas_Perms_Possiveis)
+% simplifica(Perms_Possiveis, Novas_Perms_Possiveis), em que Perms_Possiveis eh
+% uma lista de permutacoes possiveis, significa que Novas_Perms_Possiveis eh o
+% resultado de simplificar Perms_Possiveis.
+%-------------------------------------------------------------------------------
+simplifica(P1, P3) :-
+    atribui_comuns(P1),
+    retira_impossiveis(P1, P2),
+    (P1 \== P2, simplifica(P2, P3); P2 = P3).
+
+%-------------------------------------------------------------------------------
 %               any(Goal, Lista)
 %-------------------------------------------------------------------------------
 any(Goal, [El | _]) :-
