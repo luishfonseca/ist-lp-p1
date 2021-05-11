@@ -199,13 +199,13 @@ inicializa(Puzzle, Novas_Perms_Possiveis) :-
     simplifica(Perms_Possiveis, Novas_Perms_Possiveis).
 
 %-------------------------------------------------------------------------------
-%               escolhe_menor_alternativas(Perms_Possiveis, Escolha)
+%               escolhe_menos_alternativas(Perms_Possiveis, Escolha)
 % escolhe_menos_alternativas(Perms_Possiveis, Escolha), em que Perms_Possiveis
 % eh uma lista de permutacoes possiveis, significa que Escolha eh o primeiro
 % elemento de Perms_Possiveis que tenha associado um numero minimo de
 % permutacoes possiveis maior do que um.
 %-------------------------------------------------------------------------------
-escolhe_menor_alternativas(Perms_Possiveis, [Vars, Perms]) :-
+escolhe_menos_alternativas(Perms_Possiveis, [Vars, Perms]) :-
     member([Vars, Perms], Perms_Possiveis),
     any(var, Vars),
     all(mais_curto(Perms), Perms_Possiveis), !.
